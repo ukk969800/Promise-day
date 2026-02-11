@@ -4,150 +4,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Promise Day Laxmi 💜</title>
+<title>Happy Promise Day Laxmi ❤️</title>
 
 <style>
 body {
-    margin:0;
-    overflow:hidden;
-    font-family:'Courier New', monospace;
-    background: linear-gradient(135deg, #E6E6FA, #DDA0DD, #FFC0CB);
-    color:#8B0000;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #E6E6FA, #FFC0CB);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Georgia', serif;
+    overflow: hidden;
 }
 
-/* Coding screen */
-#code {
-    padding:40px;
-    font-size:18px;
-    white-space:pre-wrap;
+.card {
+    background: white;
+    width: 85%;
+    max-width: 750px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+    text-align: center;
+    position: relative;
 }
 
-/* Final Message */
-#finalMessage {
-    display:none;
-    text-align:center;
-    margin-top:18%;
-    font-size:65px;
-    font-weight:bold;
-    animation: heartbeat 1.2s infinite;
+.quote {
+    opacity: 0;
+    font-size: 20px;
+    margin: 15px 0;
+    transition: opacity 1.5s ease-in-out;
 }
 
-.nameGlow {
-    color:#ff0000;
-    text-shadow:0 0 15px red, 0 0 25px crimson, 0 0 40px darkred;
+.show {
+    opacity: 1;
 }
 
-/* Heartbeat */
-@keyframes heartbeat {
-    0% { transform: scale(1); }
-    25% { transform: scale(1.08); }
-    50% { transform: scale(1); }
-    75% { transform: scale(1.08); }
-    100% { transform: scale(1); }
+.final {
+    font-size: 28px;
+    font-weight: bold;
+    color: crimson;
 }
 
-/* Rose rain */
-.rose {
-    position:absolute;
-    top:-50px;
-    font-size:28px;
-    animation:fall linear infinite;
+button {
+    margin-top: 25px;
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(45deg, pink, crimson);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
 }
 
-@keyframes fall {
-    to { transform:translateY(100vh); }
+button:hover {
+    transform: scale(1.1);
 }
 
-/* Floating Hearts */
+.response {
+    margin-top: 20px;
+    font-size: 24px;
+    color: darkred;
+    font-weight: bold;
+    display: none;
+}
+
 .heart {
-    position:absolute;
-    color:pink;
-    font-size:20px;
-    animation: floatUp 4s linear infinite;
+    position: absolute;
+    color: pink;
+    font-size: 20px;
+    animation: float 6s linear infinite;
 }
 
-@keyframes floatUp {
-    from { transform: translateY(100vh); opacity:1; }
-    to { transform: translateY(-10vh); opacity:0; }
+@keyframes float {
+    from { transform: translateY(100vh); opacity: 1; }
+    to { transform: translateY(-10vh); opacity: 0; }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- Soft Romantic Instrumental Music -->
-<audio autoplay loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
-</audio>
+<div class="card">
+    <div class="quote">❤️ Happy Promise Day, Laxmi ❤️</div>
+    <div class="quote">I may not be perfect, and I may not understand every feeling of yours instantly,</div>
+    <div class="quote">but I promise I will always try — sincerely, patiently, and with all my heart.</div>
+    <div class="quote">I promise to take care of you, to stand by you in every situation, and never be the reason for your tears.</div>
+    <div class="quote">No matter how life tests us, I will not step back, I will not give up, and I will always take a stand for you.</div>
+    <div class="quote">Even if I don’t understand everything at the beginning, I promise to learn you slowly, understand your heart deeply, and grow with you every single day.</div>
+    <div class="quote">I want to share my life with you, to love you honestly, to stay loyal, and to walk beside you for as long as I breathe.</div>
+    <div class="quote">Please give me a chance to prove my love through actions, not just words.</div>
+    <div class="quote final">I choose you — today and always. ❤️</div>
 
-<div id="code"></div>
-
-<div id="finalMessage">
-💜 HAPPY PROMISE DAY 💜<br>
-<span class="nameGlow">LOVE YOU LAXMI</span><br>
-Forever Yours, Krishna ❤️
+    <button onclick="showResponse()">Will you give me a chance? 💖</button>
+    <div class="response" id="response">Forever Yours, Krishna ❤️</div>
 </div>
 
 <script>
-const text = `
-Booting LovePromise_System.exe...
+const quotes = document.querySelectorAll('.quote');
+let index = 0;
 
-> Scanning Heart...
-> Loading Care Module...
-> Activating Loyalty Shield...
-> Protecting Laxmi's Smile...
-
-Promise {
-    I will take care of you, Laxmi.
-    I will never be the reason for your tears.
-    I will stand beside you in every situation.
-    Even if I don't understand instantly,
-    I will learn you slowly and sincerely.
-    I choose you — today, tomorrow, and always.
-}
-
-Status: Promise Locked Forever ❤️
-`;
-
-let i=0;
-function typeWriter(){
-    if(i<text.length){
-        document.getElementById("code").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter,35);
-    } else {
-        setTimeout(()=>{
-            document.getElementById("code").style.display="none";
-            document.getElementById("finalMessage").style.display="block";
-        },2000);
+function showNextQuote() {
+    if (index < quotes.length) {
+        quotes[index].classList.add('show');
+        index++;
+        setTimeout(showNextQuote, 2500);
     }
 }
-typeWriter();
 
-// Rose rain
-function createRose(){
-    const rose=document.createElement("div");
-    rose.classList.add("rose");
-    rose.innerHTML="🌹";
-    rose.style.left=Math.random()*window.innerWidth+"px";
-    rose.style.animationDuration=(Math.random()*3+3)+"s";
-    document.body.appendChild(rose);
-    setTimeout(()=>{rose.remove();},6000);
+showNextQuote();
+
+function showResponse() {
+    document.getElementById("response").style.display = "block";
 }
-setInterval(createRose,300);
 
-// Floating hearts
-function createHeart(){
-    const heart=document.createElement("div");
+// Floating hearts background
+function createHeart() {
+    const heart = document.createElement("div");
     heart.classList.add("heart");
-    heart.innerHTML="💗";
-    heart.style.left=Math.random()*window.innerWidth+"px";
+    heart.innerHTML = "💗";
+    heart.style.left = Math.random() * window.innerWidth + "px";
     document.body.appendChild(heart);
-    setTimeout(()=>{heart.remove();},4000);
+    setTimeout(() => { heart.remove(); }, 6000);
 }
-setInterval(createHeart,500);
 
+setInterval(createHeart, 500);
 </script>
 
 </body>
